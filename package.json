@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/BioBoost/touchkey/issues"
   },
-  "homepage": "https://github.com/BioBoost/touchkey#readme"
+  "homepage": "https://github.com/BioBoost/touchkey#readme",
+  "dependencies": {
+    "i2c-bus": "^4.0.10",
+    "qt1070": "^1.0.0"
+  }
 }
