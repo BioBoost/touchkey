@@ -22,6 +22,7 @@
   "homepage": "https://github.com/BioBoost/touchkey#readme",
   "dependencies": {
     "i2c-bus": "^4.0.10",
-    "qt1070": "^1.0.0"
+    "qt1070": "^1.0.0",
+    "onoff": "^4.1.3"
   }
 }
