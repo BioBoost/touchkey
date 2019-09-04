@@ -1,0 +1,23 @@
+{
+  "name": "touchkey",
+  "version": "1.0.0",
+  "description": "Touch Keypad lib for QT1070.",
+  "main": "./src/touchkey.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BioBoost/touchkey.git"
+  },
+  "keywords": [
+    "touch",
+    "qt1070"
+  ],
+  "author": "Nico De Witte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BioBoost/touchkey/issues"
+  },
+  "homepage": "https://github.com/BioBoost/touchkey#readme"
+}
