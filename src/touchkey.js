@@ -23,13 +23,32 @@ class TouchKey {
   }
 
   start_watching_for_keys() {
+    this.previousKeyState = 0;
     this.interrupt.watch((err, value) => {
       if (!err) {
         let keys = this.read_full_status().keys;
-        console.log(`Keys: ${keys}`);
+        let keyEvents = this.determine_key_events(keys);
+        this.previousKeyState = keys;
+        console.log(keyEvents);
       }
     });
   }
+
+  determine_key_events(currentKeyState) {
+    let events = [];
+    let pressed = currentKeyState & (~this.previousKeyState);
+    let released = this.previousKeyState & (~currentKeyState);
+
+    for (let i = 0; i < 7; i++) {
+      if (pressed & (0x01 << i)) {
+        events.push({ key: i, state: 'pressed' })
+      } else if (released & (0x01 << i)) {
+        events.push({ key: i, state: 'released' })
+      }
+    }
+    return events;
+  }
+
 
 }
 
