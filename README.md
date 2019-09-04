@@ -26,3 +26,34 @@ This library makes use of:
 * [qt1070](https://www.npmjs.com/package/qt1070) a driver library to interact with the QT1070
 * [i2c-bus](https://www.npmjs.com/package/i2c-bus) to communicate with i2c devices
 * [onoff](https://www.npmjs.com/package/onoff) to detect the interrupts coming from the QT1070 chip
+
+## Example
+
+The i2c object needs to be injected via the constructor.
+
+A basic example:
+
+```js
+const TouchKey = require('touchkey');
+const i2c = require('i2c-bus');
+
+const i2c1 = i2c.open(1, (err) => {
+  if (err) throw err;
+  console.log("Opened i2c bus successfully");
+
+  let keypad = new TouchKey(i2c1);
+
+  keypad.on('keychange', (event) => {
+    console.log("Getting keychange event " + JSON.stringify(event));
+  });
+
+  keypad.on('keydown', (event) => {
+    console.log("Getting keydown event " + JSON.stringify(event));
+  });
+
+  keypad.on('keyup', (event) => {
+    console.log("Getting keyup event " + JSON.stringify(event));
+  });
+
+});
+```
