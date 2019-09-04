@@ -1,10 +1,12 @@
 const Qt1070 = require('qt1070');
 const i2c = require('i2c-bus');
 const Gpio = require('onoff').Gpio;
+const EventEmitter = require( 'events' );
 
-class TouchKey {
+class TouchKey extends EventEmitter {
 
   constructor(i2c, interruptPin=4) {
+    super();
     this.touch = new Qt1070(i2c);
     this.interrupt = new Gpio(interruptPin, 'in', 'falling');
     this.read_full_status();    // Clears interrupt flags
@@ -29,7 +31,7 @@ class TouchKey {
         let keys = this.read_full_status().keys;
         let keyEvents = this.determine_key_events(keys);
         this.previousKeyState = keys;
-        console.log(keyEvents);
+        this.emit_key_events(keyEvents);
       }
     });
   }
@@ -49,6 +51,16 @@ class TouchKey {
     return events;
   }
 
+  emit_key_events(events) {
+    events.forEach(event => {
+      this.emit('keychange', event);
+      if (event.state === 'pressed') {
+        this.emit('keydown', event);
+      } else {
+        this.emit('keyup', event)
+      }
+    });
+  }
 
 }
 
