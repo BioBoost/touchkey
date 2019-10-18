@@ -1,6 +1,6 @@
 {
   "name": "touchkey",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Touch Keypad lib for QT1070.",
   "main": "./src/touchkey.js",
   "scripts": {
