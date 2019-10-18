@@ -13,6 +13,11 @@ class TouchKey extends EventEmitter {
     this.start_watching_for_keys();
   }
 
+  key_states() {
+    let keys = this.touch.keys();
+    return this.create_event_list(keys, ~keys);
+  }
+
   //////////////////////
   // Internal methods //
   //////////////////////
@@ -37,9 +42,14 @@ class TouchKey extends EventEmitter {
   }
 
   determine_key_events(currentKeyState) {
-    let events = [];
     let pressed = currentKeyState & (~this.previousKeyState);
     let released = this.previousKeyState & (~currentKeyState);
+
+    return this.create_event_list(pressed, released);
+  }
+
+  create_event_list(pressed, released) {
+    let events = [];
 
     for (let i = 0; i < 7; i++) {
       if (pressed & (0x01 << i)) {

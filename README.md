@@ -19,6 +19,8 @@ The event object contains both the `key` (0 to 6) and `state` (`'pressed'` or `'
 }
 ```
 
+You can also read the current state of the keys using the method `key_states()` which returns an array of all keys in the format shown above.
+
 ## Dependencies
 
 This library makes use of:
